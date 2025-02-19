@@ -1,0 +1,51 @@
+{% extends "label_music_manager/base.html" %}
+
+{% block content %}
+
+        {% load crispy_forms_tags %}
+        {%if messages%}
+        <div class="container my-4">
+         <ul class="messages">
+          {% csrf_token %}
+          {% for message in messages%}
+          <li class="list-unstyled" {% if message.tags %}
+          class="{{ messages.tags}}"
+          {%endif%}>
+          <div class="p-3 mb-3 px-1 py-1 text-white" style="background-color: #8be0a2; border-radius: 5px; text-align: center">
+          {{message}}
+          </div>
+         </div>
+        </li>
+        {%endfor%}
+         </ul>
+        {%endif%}
+
+        <div class="container my-4">
+        {% if user.is_authenticated and isEditor%}
+        <form action="{% url 'create-album'%}" method="GET" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Add Album</button>
+        </form>
+        {% endif %}
+      </div>
+
+        <div class="container my-4">
+          <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for a in album_list%}
+            <a href="{% url 'detail-view' album_id=a.id %}" style="text-decoration: none;">
+            <div class="col">
+              <div class="card">
+                <img src="{{ a.cover_image.url }}" class="card-img-top" alt="{{a.title}} cover">
+                <div class="card-body">
+                    <h5 class="card-title">{{ a.title }}</h5>
+                    <p class="card-text">{{ a.artist }}</p>
+                    <p class="card-text">{{a.description}}</p>
+                    <p class="card-text">{{ a.price}} ({{a.format}})</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}

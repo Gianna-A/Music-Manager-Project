@@ -1,0 +1,15 @@
+{% extends "label_music_manager/base.html" %}
+
+{% block content %}
+<h2>Create an Album</h2>
+
+{% load crispy_forms_tags %}
+    <form method="POST" action="{% url 'create-album' %}">
+        {% csrf_token %}
+        
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary">Add Album</button>
+    </form>
+
+    <a href="{% url 'list-album' %}">Cancel</a>
+{% endblock content %}

@@ -1,0 +1,16 @@
+{% extends "label_music_manager/base.html" %}
+
+{% block content %}
+<div class="container my-4">
+<h4>Do you really want to delete this album?</h4>
+<form action="{% url 'delete-view' album_id=album_detail.id %}" method="POST" style="display: inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Delete {{album_detail.title}}</button>
+</form>
+<form action="{% url 'detail-view' album_id=album_detail.id %}" method="GET" style="display: inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Cancel</button>
+</form>
+</div>
+
+{% endblock content %}

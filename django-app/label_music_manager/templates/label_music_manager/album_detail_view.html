@@ -1,0 +1,52 @@
+{% extends "label_music_manager/base.html" %}
+
+{% block content %}
+
+<div class="container my-4">
+{% if user.is_authenticated and can_delete %}
+    <form action="{% url 'delete-view' album_id=album_detail.id %}" method="GET" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete Album</button>
+    </form>
+    <form action="{% url 'edit-album' album_id=album_detail.id %}" method="GET" style="display: inline;">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-primary">Edit Album</button>
+  </form>
+{% endif %}
+</div>
+
+
+<div class="container my-4">
+            <div class="col-12">
+              <div class="card">
+                <img src="{{ album_detail.cover_image.url }}" class="card-img-top" alt="{{album_detail.title}} cover">
+                <div class="card-body">
+                    <h5 class="card-title">{{ album_detail.title }}</h5>
+                    <p class="card-text">{{ album_detail.artist }}</p>
+                    <p class="card-text">{{ album_detail.description }}</p>
+                    <p class="card-text">{{ album_detail.price}} ({{album_detail.format}})</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-4">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        {%if tracklist|length > 0%}
+          <h5 class="card-title">TrackList</h5>
+          {% for t in tracklist%}
+          <p class="card-text">{{ forloop.counter}}. {{t.song.title}} - {{t.song.runtime}}s</p>
+          {%endfor%}
+        {% else %}
+        <h5 class="card-title">No Songs Added</h5>
+        {%endif%}
+      </div>
+  </div>
+</div>
+</div>
+</div>
+
+{% endblock content %}
