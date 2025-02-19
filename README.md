@@ -8,7 +8,7 @@ Music Manager Web App is a full-stack platform for managing songs, albums, and m
   - Artists, editors, and viewers have different permissions to manage music data securely.  
 - 🎼 **Music & Album Management**  
   - Upload songs, create albums, and edit metadata efficiently.  
-- 🔍 **Optimized Search & Retrieval**  
+- 🔍 **Optimised Search & Retrieval**  
   - Fast and scalable API endpoints for managing large datasets.  
 - 📊 **Efficient Database Performance**  
   - Query optimisation ensures quick data retrieval.  
